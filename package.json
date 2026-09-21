@@ -1,0 +1,20 @@
+{
+  "name": "sonnys-surf-shop",
+  "version": "1.0.0",
+  "description": "An online surf shop",
+  "homepage": "https://github.com/tslmusic2/sonnys-surf-shop#readme",
+  "bugs": {
+    "url": "https://github.com/tslmusic2/sonnys-surf-shop/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tslmusic2/sonnys-surf-shop.git"
+  },
+  "license": "ISC",
+  "author": "tslmusic2",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
