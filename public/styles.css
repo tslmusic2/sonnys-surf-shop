@@ -1,0 +1,38 @@
+* {
+        box-sizing: border-box;
+}
+
+:root {
+        --richred: #991B1B;
+        --text-color: #FFF7ED ;
+        --accent-black: black;
+}
+
+body {
+        margin: 0;
+        padding: 0;
+}
+
+
+
+
+/*======TYPOGRAPHY======*/
+
+
+
+
+
+
+
+
+/*======LAYOUT======*/
+
+
+
+
+
+
+
+
+/*======MEDIA QUERY======*/
+
