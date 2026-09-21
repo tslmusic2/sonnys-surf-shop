@@ -45,6 +45,96 @@ const server = http.createServer(async (req, res) => {
 
         if (req.url === '/api/orders' && req.method === 'POST') {
 
+            const parsedReqBody = await getRequestBody(req)
+
+            const surfboardInventoryFile = await fs.readFile(surfboardInventoryFilePath, 'utf8')
+            const parsedSurfboardInventoryFile = JSON.parse(surfboardInventoryFile)
+
+
+            for (const orderedItem of parsedReqBody.items) {
+                const product = parsedSurfboardInventoryFile.find(
+                    item => item.id === orderedItem.id
+                )
+
+                if (!product) {
+                    return sendResponse(
+                        res,
+                        404,
+                        'application/json',
+                        JSON.stringify({error: 'Item Not Found'})
+                    )
+                }
+
+                if (orderedItem.quantity <= 0) {
+                    return sendResponse(
+                        res,
+                        400,
+                        'application/json',
+                        JSON.stringify({error: 'Invalid Order'})
+                    )
+                }
+
+                if (orderedItem.quantity > product.quantity) {
+                    return sendResponse(
+                        res,
+                        409,
+                        'application/json',
+                        JSON.stringify({error: 'Not enough in stock'})
+                    )
+                }
+
+            }
+
+
+            let priceTotal = 0
+            const fullOrder = []
+
+
+            for (const orderedItem of parsedReqBody.items) {
+                const product = parsedSurfboardInventoryFile.find(
+                    item => item.id === orderedItem.id
+                )
+
+                product.quantity -= orderedItem.quantity
+                const itemTotal = product.price * orderedItem.quantity
+                priceTotal += itemTotal
+
+
+                fullOrder.push({
+                    "id": product.id,
+                    "name": product.name,
+                    "brand": product.brand,
+                    "quantity": orderedItem.quantity,
+                    "price": product.price,
+                    "priceTotal": itemTotal
+                })
+            }
+
+
+            const ordersFile = await fs.readFile(ordersFilePath, 'utf8')
+            const parsedOrdersFile = JSON.parse(ordersFile)
+
+            const orderId = parsedOrdersFile.length > 0 ?
+                Math.max(...parsedOrdersFile.map(order => order.id + 1)) : 1
+
+            
+            const newOrder = {
+                "id": orderId,
+                "items": fullOrder,
+                "totalPrice": Math.round(priceTotal * 100) / 100
+            }
+
+            parsedOrdersFile.push(newOrder)
+
+            await fs.writeFile(surfboardInventoryFilePath, JSON.stringify(parsedSurfboardInventoryFile, null, 2), 'utf8')
+            await fs.writeFile(ordersFilePath, JSON.stringify(parsedOrdersFile, null, 2), 'utf8')
+
+            return sendResponse(
+                res,
+                200,
+                'aplication/json',
+                JSON.stringify({message: 'Your Order was Processed successfully'})
+            )
 
         }
 

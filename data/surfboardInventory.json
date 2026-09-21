@@ -1,11 +1,38 @@
 [
   {
-  "id": 1,
-  "name": "",
-  "brand": "",
-  "height": 6.5,
-  "width": "",
-  "quantity": 22,
-  "price": 11.99
+    "id": 1,
+    "name": "The Chunkster",
+    "brand": "Lost",
+    "height": 6.5,
+    "width": "22",
+    "quantity": 18,
+    "price": 800
+  },
+  {
+    "id": 2,
+    "name": "Shredder",
+    "brand": "Al Merrick",
+    "height": 5.1,
+    "width": 19,
+    "quantity": 20,
+    "price": 600
+  },
+  {
+    "id": 3,
+    "name": "Fish Nasty",
+    "brand": "Super",
+    "height": 6,
+    "width": 21,
+    "quantity": 20,
+    "price": 750
+  },
+  {
+    "id": 4,
+    "name": "Trestle",
+    "brand": "Cali Surf",
+    "height": 6.5,
+    "width": 20,
+    "quantity": 20,
+    "price": 900
   }
 ]

@@ -1,3 +1,16 @@
 [
-  
+  {
+    "id": 1,
+    "items": [
+      {
+        "id": 1,
+        "name": "The Chunkster",
+        "brand": "Lost",
+        "quantity": 2,
+        "price": 800,
+        "priceTotal": 1600
+      }
+    ],
+    "totalPrice": 1600
+  }
 ]
